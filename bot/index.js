@@ -1,20 +1,25 @@
 const privateData = require("./privates.js");
 const commando = require("discord.js-commando");
-const bot = new commando.Client({unknownCommandResponse: false, owner: privateData.ownerID});
+const fileIO = require("./savedFiles/fileIO");
 
-bot
+const client = new commando.Client({unknownCommandResponse: false, owner: privateData.ownerID});
+client
     .registry
     .registerGroup("inhouse", "Inhouse");
-bot
+client
     .registry
     .registerGroup("admin", "Admin");
-bot
+client
     .registry
     .registerDefaults();
-bot
+client
     .registry
     .registerCommandsIn(__dirname + "/commands");
 
-bot.login(privateData.key);
+client.login(privateData.key);
+
+//Load in from file
+client.inhouseUsers = fileIO.readUsers();
+client.inhouseGames = fileIO.readGames();
 
 console.log("Bot is online");
