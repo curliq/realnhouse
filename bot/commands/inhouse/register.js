@@ -1,6 +1,5 @@
 const commando = require("discord.js-commando");
-const fileIO = require("../../fileIO");
-
+const fileIO = require("../../savedFiles/fileIO");
 const trueskill = require("ts-trueskill");
 trueskill.TrueSkill();
 
@@ -12,26 +11,27 @@ class RegisterCommand extends commando.Command {
             memberName: "register",
             description: "Register yourself to play, !register <name> <na/eu>"
         })
+        this.users = fileIO.data.users;
     }
 
     async run(message, args) {
         const formattedArgs = args.split(" ");
         if (message.channel.id == '325760309996290048') {
+            console.log(formattedArgs[1])
             if (!formattedArgs[0]) {
                 message
                     .channel
                     .send("Please provide a username to register with, which should be your Battlerite name");
-            }
-            if (!formattedArgs[1] && (formattedArgs[1].toUpperCase() !== "NA" || formattedArgs[1].toUpperCase() !== "EU")) {
+            } else if (!formattedArgs[1] || (formattedArgs[1].toUpperCase() !== "NA" && formattedArgs[1].toUpperCase() !== "EU")) {
                 message
                     .channel
-                    .send("Please provide a region. !register <EU/NA>");
+                    .send("Please provide a region. !register <username> <EU/NA>");
             } else {
-                const users = this.client.inhouseUsers;
+                const users = this.users;
                 const discordID = message.author.id;
                 const name = formattedArgs[0].trim();
                 const region = formattedArgs[1].toUpperCase();
-                if (!users.find(u => u.discordID === discordID)) {
+                if (!this.users.find(u => u.discordID === discordID) && !this.users.find(u => u.name === name)) {
                     const newUser = {
                         discordID,
                         name,
@@ -40,15 +40,17 @@ class RegisterCommand extends commando.Command {
                         wins: 0,
                         losses: 0
                     }
-                    users.push(newUser);
+                    this
+                        .users
+                        .push(newUser);
                     message
                         .channel
-                        .send(`Registered ${name} in ${region}`)
-                    fileIO.writeUsers(this.client.inhouseUsers);
+                        .send(`Registered ${discordID} as ${name} in ${region}`)
+                    fileIO.writeUsers(this.users);
                 } else {
                     message
                         .channel
-                        .send(`${name} is already registered.`);
+                        .send(`${discordID} or ${name} is already registered.`);
                 }
             }
         }

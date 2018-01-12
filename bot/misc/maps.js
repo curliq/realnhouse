@@ -1,3 +1,4 @@
+const shuffle = require("lodash").shuffle;
 const mapList = [
     "Araz Day",
     "Araz Night",
@@ -9,8 +10,8 @@ const mapList = [
     "Dragon Night"
 ];
 exports.getMaps = () => {
-    mapList = _.shuffle(mapList);
-    return `1: ${mapList[0]}
-2: ${mapList[1]}
-3: ${mapList[2]}`;
+    const tempMaps = shuffle(mapList);
+    return `1: ${tempMaps[0]}
+2: ${tempMaps[1]}
+3: ${tempMaps[2]}`;
 }
