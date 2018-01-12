@@ -6,6 +6,7 @@ class ProfileCommand extends commando.Command {
     constructor(client) {
         super(client, {
             name: "profile",
+            aliases:["p"],
             group: "inhouse",
             memberName: "profile",
             description: "Check yours (or others) stats `!profile < /womackx>"

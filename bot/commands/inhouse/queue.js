@@ -14,9 +14,10 @@ class QueueCommand extends commando.Command {
     constructor(client) {
         super(client, {
             name: "queue",
+            aliases: ["q","que"],
             group: "inhouse",
             memberName: "queue",
-            description: "Join or Leave the inhouse queue"
+            description: "!queue will make you **join** OR **leave**, depending on if you are in or not."
         });
 
         this.users = fileIO.data.users;

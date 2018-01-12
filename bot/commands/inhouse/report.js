@@ -11,6 +11,7 @@ class ReportCommand extends commando.Command {
     constructor(client) {
         super(client, {
             name: "report",
+            aliases: ["r"],
             group: "inhouse",
             memberName: "report",
             description: "Report the results of a match !report win/lose",

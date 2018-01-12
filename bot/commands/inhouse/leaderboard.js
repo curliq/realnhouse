@@ -7,6 +7,7 @@ class LeaderboardCommand extends commando.Command {
     constructor(client) {
         super(client, {
             name: "leaderboard",
+            aliases:["l"],
             group: "inhouse",
             memberName: "leaderboard",
             description: "Check the top 15 players"
