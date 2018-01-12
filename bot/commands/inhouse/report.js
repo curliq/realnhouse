@@ -5,7 +5,6 @@ const combinatorics = require("js-combinatorics");
 const fileIO = require("../../savedFiles/fileIO");
 const getClosestMatch = require("../../misc/matchmaking").getClosestMatch;
 const discordFormatting = require("../../misc/discordFormatting");
-
 trueskill.TrueSkill();
 
 class ReportCommand extends commando.Command {
@@ -14,27 +13,59 @@ class ReportCommand extends commando.Command {
             name: "report",
             group: "inhouse",
             memberName: "report",
-            description: "Report the results of a match !report <id> <teamA/teamB>"
+            description: "Report the results of a match !report win/lose",
+            args: [
+                {
+                    key: "result",
+                    prompt: "Please type the result of your match (From your perspective) <win/lose>",
+                    type: "string"
+                }
+            ]
         })
-
         this.users = fileIO.data.users;
         this.games = fileIO.data.games;
     }
 
     async run(message, args) {
-        const formattedArgs = args.split(" ");
-        if (formattedArgs[0]) { //only require teamA/B
-            const winningTeam = formattedArgs[0];
+        const userID = message.author.id;
+        if (args.result) { //only require teamA/B
+            const winOrLose = args
+                .result
+                .toLowerCase();
             const reportedGame = this
                 .games
-                .find(game => game.playerIDs.includes(message.author.id))
+                .find(game => game.playerIDs.includes(userID))
             const reportedGameIndex = this
                 .games
-                .find(game => game.playerIDs.includes(message.author.id))
-            const matchID = reportedGame.gameID;
+                .find(game => game.playerIDs.includes(userID))
 
             if (reportedGame) {
-                if (reportedGame.playerIDs.find(id => message.author.id)) {
+                if (reportedGame.playerIDs.find(id => id === userID)) {
+                    const matchID = reportedGame.gameID;
+                    let winningTeam = "undecided";
+                    let playersTeam = "dunnoyet";
+                    if (reportedGame.match.teamA.find(player => player.discordID === userID)) {
+                        playersTeam = "teamA"
+                    } else {
+                        playersTeam = "teamB"
+                    }
+                    if (winOrLose === "win" || winOrLose === "won") {
+                        reportedGame.results[playersTeam] = "won";
+                    } else if (winOrLose === "lose" || winOrLose === "lost" || winOrLose === "loss") {
+                        reportedGame.results[playersTeam] = "lost";
+                    }
+                    //Then check if its right, so one team should have one, one lost etc.
+                    if (reportedGame.results.teamA === "lost" & reportedGame.results.teamB === "won") {
+                        winningTeam = "teamb";
+                    } else if (reportedGame.results.teamA === "won" & reportedGame.results.teamB === "lost") {
+                        winningTeam = "teama";
+                    }
+                    //if winning team has been set then it'll go ahead
+                    if (reportedGame.results.teamA !== "nothing" && reportedGame.results.teamB !== "nothing" && winningTeam === "undecided") {
+                        message
+                            .channel
+                            .send(`Current status of game report:\n\`TeamA: ${reportedGame.results.teamA}\nTeamB: ${reportedGame.results.teamB}\``)
+                    }
                     if (winningTeam.toLowerCase() === "teama") {
                         reportedGame
                             .match
@@ -116,21 +147,15 @@ class ReportCommand extends commando.Command {
                             .splice(reportedGameIndex, 1);
                         fileIO.writeUsers(this.users);
                         fileIO.writeGames(this.games);
-
                         message
                             .channel
                             .send(`Updated results for match ID \` ${matchID} \` with winning Team: TeamB\n Ratings after match are ${discordFormatting.jsonFormat(JSON.stringify(output, null, 4))}`);
-                    } else {
-                        message
-                            .channel
-                            .send(`No team found called ${winningTeam}`)
                     }
                 } else {
                     message
                         .channel
                         .send("User was not in specified game");
                 }
-
             } else {
                 message
                     .channel

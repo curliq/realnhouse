@@ -57,8 +57,8 @@ exports.writeGames = () => {
         const tmpGame = {
             gameID: game.gameID,
             results: {
-                winA: 0,
-                winB: 0
+                teamA: "nothing",
+                teamB: "nothing"
             }
         }
         if (game.playerIDs) {

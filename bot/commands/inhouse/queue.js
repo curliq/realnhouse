@@ -124,6 +124,10 @@ class QueueCommand extends commando.Command {
                                     playerIDs: this
                                         .queueIDs
                                         .slice(),
+                                    results: {
+                                        teamA: "nothing",
+                                        teamB: "nothing"
+                                    },
                                     match: closestMatch
                                 });
                             this.queueIDs = [];
@@ -135,7 +139,8 @@ class QueueCommand extends commando.Command {
                                 "description": "A 3v3 match has been created",
                                 "author": {
                                     "name": message.guild.name,
-                                    "icon_url": "https://cdn.pixabay.com/photo/2014/04/03/10/11/exclamation-mark-310101_960_720.png"
+                                    "icon_url": "https://cdn.pixabay.com/photo/2014/04/03/10/11/exclamation-mark-310101_960_720.p" +
+                                            "ng"
                                 },
                                 "fields": [
                                     {

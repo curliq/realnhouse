@@ -15,6 +15,9 @@ client
 client
     .registry
     .registerGroup("admin", "Admin");
+    client
+    .registry
+    .registerGroup("roles", "Roles");
 client
     .registry
     .registerDefaults();

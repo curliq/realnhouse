@@ -9,28 +9,37 @@ class RegisterCommand extends commando.Command {
             name: "register",
             group: "inhouse",
             memberName: "register",
-            description: "Register yourself to play, !register <name> <na/eu>"
+            description: "Register yourself to play, !register <name> <na/eu>",
+            args: [
+                {
+                    key: "sn",
+                    prompt: "Please type your battlerite username",
+                    type: "string"
+                }, {
+                    key: "region",
+                    prompt: "Please type your battlerite region",
+                    type: "string"
+                }
+            ]
         })
         this.users = fileIO.data.users;
     }
 
     async run(message, args) {
-        const formattedArgs = args.split(" ");
         if (message.channel.id == '325760309996290048') {
-            console.log(formattedArgs[1])
-            if (!formattedArgs[0]) {
+            if (formattedArgs[1].toUpperCase() !== "NA" && formattedArgs[1].toUpperCase() !== "EU") {
                 message
                     .channel
-                    .send("Please provide a username to register with, which should be your Battlerite name");
-            } else if (!formattedArgs[1] || (formattedArgs[1].toUpperCase() !== "NA" && formattedArgs[1].toUpperCase() !== "EU")) {
-                message
-                    .channel
-                    .send("Please provide a region. !register <username> <EU/NA>");
+                    .send("Please provide a correct region. !register <username> <EU/NA>");
             } else {
                 const users = this.users;
                 const discordID = message.author.id;
-                const name = formattedArgs[0].trim();
-                const region = formattedArgs[1].toUpperCase();
+                const name = args
+                    .username
+                    .trim();
+                const region = args
+                    .region
+                    .toUpperCase();
                 if (!this.users.find(u => u.discordID === discordID) && !this.users.find(u => u.name === name)) {
                     const newUser = {
                         discordID,
