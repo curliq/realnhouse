@@ -35,7 +35,7 @@ class RegisterCommand extends commando.Command {
                 const users = this.users;
                 const discordID = message.author.id;
                 const name = args
-                    .username
+                    .sn
                     .trim();
                 const region = args
                     .region
