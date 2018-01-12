@@ -27,7 +27,7 @@ class RegisterCommand extends commando.Command {
 
     async run(message, args) {
         if (message.channel.id == '398946565831655424') {
-            if (formattedArgs[1].toUpperCase() !== "NA" && formattedArgs[1].toUpperCase() !== "EU") {
+            if (args.region.toUpperCase() !== "NA" && args.region.toUpperCase() !== "EU") {
                 message
                     .channel
                     .send("Please provide a correct region. !register <username> <EU/NA>");
