@@ -26,7 +26,7 @@ class RegisterCommand extends commando.Command {
     }
 
     async run(message, args) {
-        if (message.channel.id == '325760309996290048') {
+        if (message.channel.id == '398946565831655424') {
             if (formattedArgs[1].toUpperCase() !== "NA" && formattedArgs[1].toUpperCase() !== "EU") {
                 message
                     .channel
@@ -62,6 +62,7 @@ class RegisterCommand extends commando.Command {
                         .send(`${discordID} or ${name} is already registered.`);
                 }
             }
+            message.delete();
         }
     }
 }

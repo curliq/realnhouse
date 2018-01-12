@@ -15,16 +15,19 @@ class LeaderboardCommand extends commando.Command {
     }
 
     async run(message) {
-        const tmpUsers = [];
-        const sortedUsers = sortBy(this.users, (user) => -1 * user.rating.mu);
-        sortedUsers.forEach((user, index) => {
-            if ((user.wins + user.losses >= 5)) {
-                tmpUsers.push(`${index + 1}. ${user.name} ${user.wins} - ${user.losses} - ${Math.floor(100 * user.rating.mu)}`)
-            }
-        });
-        message
-            .channel
-            .send(`Top 15 users with 5+ games played are:${discordFormatting.jsonFormat(JSON.stringify(tmpUsers.slice(0, 15), null, 4))}`);
+        if (message.channel.id === "398946603362287643") {
+            const tmpUsers = [];
+            const sortedUsers = sortBy(this.users, (user) => -1 * user.rating.mu);
+            sortedUsers.forEach((user, index) => {
+                if ((user.wins + user.losses >= 5)) {
+                    tmpUsers.push(`${index + 1}. ${user.name} ${user.wins} - ${user.losses} - ${Math.floor(100 * user.rating.mu)}`)
+                }
+            });
+            message
+                .channel
+                .send(`Top 15 users with 5+ games played are:${discordFormatting.jsonFormat(JSON.stringify(tmpUsers.slice(0, 15), null, 4))}`);
+        }
+        message.delete();
     }
 }
 

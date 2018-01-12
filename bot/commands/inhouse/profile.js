@@ -22,34 +22,37 @@ class ProfileCommand extends commando.Command {
     }
 
     async run(message, args) {
-        const searchName = args.split(" ")[0];
-        if (userIsRegistered(this.users, message.author.id)) {
-            if (searchName) {
-                const foundUser = this
-                    .users
-                    .find(user => user.name === searchName);
-                if (foundUser) {
+        if (message.channel.id === "398946603362287643") {
+            const searchName = args.split(" ")[0];
+            if (userIsRegistered(this.users, message.author.id)) {
+                if (searchName) {
+                    const foundUser = this
+                        .users
+                        .find(user => user.name === searchName);
+                    if (foundUser) {
+                        message
+                            .channel
+                            .send(this.getOutputFromUser(foundUser))
+                    } else {
+                        message
+                            .channel
+                            .send(`No user with name \`${searchName}\``)
+                    }
+                } else { //do your profile
+                    const foundUser = this
+                        .users
+                        .find(user => user.discordID === message.author.id);
                     message
                         .channel
                         .send(this.getOutputFromUser(foundUser))
-                } else {
-                    message
-                        .channel
-                        .send(`No user with name \`${searchName}\``)
+
                 }
-            } else { //do your profile
-                const foundUser = this
-                    .users
-                    .find(user => user.discordID === message.author.id);
+            } else {
                 message
                     .channel
-                    .send(this.getOutputFromUser(foundUser))
-
+                    .send("Please register before using this command");
             }
-        } else {
-            message
-                .channel
-                .send("Please register before using this command");
+            message.delete();
         }
     }
 }

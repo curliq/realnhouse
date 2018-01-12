@@ -82,130 +82,133 @@ class QueueCommand extends commando.Command {
     }
 
     async run(message, args) {
-        if (userIsRegistered(this.users, message.author.id)) {
-            const userID = message.author.id;
-            const user = this
-                .users
-                .find(user => user.discordID === userID);
-            // If user isnt in queue add them, or if they are X person and flag "force", for
-            // testing.
-            if (!this.userInQueue(userID) || message.author.id === "121630407782432769" && args === "force") {
-                const userActiveGame = this.getUserActiveGame(userID);
-                //User doesnt have a game
-                if (!userActiveGame) {
-                    this.mergeOverflow();
-                    if (this.queueIDs.length < 6) {
-                        this
-                            .queueIDs
-                            .push(userID);
-                        message
-                            .channel
-                            .send(`Queue currently has ${this.queueIDs.length} players`);
-                        //If there is enough for a game after adding to queue
-                        if (this.queueIDs.length === 6) {
-                            message
-                                .channel
-                                .send("Queue is now full, creating a match and clearing the queue");
-                            const closestMatch = getClosestMatch(this.getQueueUsers());
-                            const teams = {
-                                teamA: closestMatch
-                                    .teamA
-                                    .map(player => player.name),
-                                teamB: closestMatch
-                                    .teamB
-                                    .map(player => player.name)
-                            };
-                            //generate a game ID and add them to the game list
-                            const uuid = uuidv4().substring(0, 7);
+        if (message.channel.id === "398934750892392448") {
+            if (userIsRegistered(this.users, message.author.id)) {
+                const userID = message.author.id;
+                const user = this
+                    .users
+                    .find(user => user.discordID === userID);
+                // If user isnt in queue add them, or if they are X person and flag "force", for
+                // testing.
+                if (!this.userInQueue(userID) || message.author.id === "121630407782432769" && args === "force") {
+                    const userActiveGame = this.getUserActiveGame(userID);
+                    //User doesnt have a game
+                    if (!userActiveGame) {
+                        this.mergeOverflow();
+                        if (this.queueIDs.length < 6) {
                             this
-                                .games
-                                .push({
-                                    gameID: uuid,
-                                    playerIDs: this
-                                        .queueIDs
-                                        .slice(),
-                                    results: {
-                                        teamA: "nothing",
-                                        teamB: "nothing"
-                                    },
-                                    match: closestMatch
-                                });
-                            this.queueIDs = [];
-                            this.mergeOverflow();
-
-                            const embed = {
-                                "title": "`Match Created`",
-                                "color": 0x50FF38,
-                                "description": "A 3v3 match has been created",
-                                "author": {
-                                    "name": message.guild.name,
-                                    "icon_url": "https://cdn.pixabay.com/photo/2014/04/03/10/11/exclamation-mark-310101_960_720.p" +
-                                            "ng"
-                                },
-                                "fields": [
-                                    {
-                                        "name": "Players",
-                                        value: this.formatTeams(teams)
-                                    }, {
-                                        "name": "Maps",
-                                        value: maps.getMaps()
-                                    }, {
-                                        "name": "Lobby",
-                                        value: lobbies.getLobby(uuid)
-                                    }, {
-                                        "name": "Reporting Instructions",
-                                        value: "Please report results for the winning team using `!report <teamA/teamB>`"
-                                    }
-                                ]
-                            }
+                                .queueIDs
+                                .push(userID);
                             message
                                 .channel
-                                .send(this.getTagIDs(this.games.find(game => game.gameID === uuid).playerIDs), {embed});
-                            fileIO.writeGames(this.games);
+                                .send(`Queue currently has ${this.queueIDs.length} players`);
+                            //If there is enough for a game after adding to queue
+                            if (this.queueIDs.length === 6) {
+                                message
+                                    .channel
+                                    .send("Queue is now full, creating a match and clearing the queue");
+                                const closestMatch = getClosestMatch(this.getQueueUsers());
+                                const teams = {
+                                    teamA: closestMatch
+                                        .teamA
+                                        .map(player => player.name),
+                                    teamB: closestMatch
+                                        .teamB
+                                        .map(player => player.name)
+                                };
+                                //generate a game ID and add them to the game list
+                                const uuid = uuidv4().substring(0, 7);
+                                this
+                                    .games
+                                    .push({
+                                        gameID: uuid,
+                                        playerIDs: this
+                                            .queueIDs
+                                            .slice(),
+                                        results: {
+                                            teamA: "nothing",
+                                            teamB: "nothing"
+                                        },
+                                        match: closestMatch
+                                    });
+                                this.queueIDs = [];
+                                this.mergeOverflow();
+
+                                const embed = {
+                                    "title": "`Match Created`",
+                                    "color": 0x50FF38,
+                                    "description": "A 3v3 match has been created",
+                                    "author": {
+                                        "name": message.guild.name,
+                                        "icon_url": "https://cdn.pixabay.com/photo/2014/04/03/10/11/exclamation-mark-310101_960_720.p" +
+                                                "ng"
+                                    },
+                                    "fields": [
+                                        {
+                                            "name": "Players",
+                                            value: this.formatTeams(teams)
+                                        }, {
+                                            "name": "Maps",
+                                            value: maps.getMaps()
+                                        }, {
+                                            "name": "Lobby",
+                                            value: lobbies.getLobby(uuid)
+                                        }, {
+                                            "name": "Reporting Instructions",
+                                            value: "Please report results for the winning team using `!report <teamA/teamB>`"
+                                        }
+                                    ]
+                                }
+                                message
+                                    .channel
+                                    .send(this.getTagIDs(this.games.find(game => game.gameID === uuid).playerIDs), {embed});
+                                fileIO.writeGames(this.games);
+                            }
+                        } else {
+                            console.log('Adding user ' + message.user.id + ' to overflow queue while previous match is created. You will be moved to the mai' +
+                                    'n queue shortly.');
+                            this
+                                .overflowIds
+                                .push(message.user.id);
+                            message
+                                .channel
+                                .send('Added ' + user.name + ' to overflow queue while previous match is created. You will be moved to the mai' +
+                                        'n queue shortly.');
                         }
                     } else {
-                        console.log('Adding user ' + message.user.id + ' to overflow queue while previous match is created. You will be moved to the mai' +
-                                'n queue shortly.');
-                        this
-                            .overflowIds
-                            .push(message.user.id);
                         message
                             .channel
-                            .send('Added ' + user.name + ' to overflow queue while previous match is created. You will be moved to the mai' +
-                                    'n queue shortly.');
+                            .send(user.name + ' is already in a match with ID `' + userActiveGame + '`');
                     }
-                } else {
-                    message
-                        .channel
-                        .send(user.name + ' is already in a match with ID `' + userActiveGame + '`');
+                } else { //remove from queue
+                    const queueID = this
+                        .queueIDs
+                        .findIndex(q => q === userID)
+                    const overflowID = this
+                        .overflowIDs
+                        .findIndex(q => q === userID)
+                    if (queueID !== -1 || overflowID !== -1) {
+                        if (queueID !== -1) {
+                            this
+                                .queueIDs
+                                .splice(queueID, 1);
+                        }
+                        if (overflowID !== -1) {
+                            this
+                                .overflowIds
+                                .splice(overflowID, 1);
+                        }
+                        message
+                            .channel
+                            .send(`There are ${this.queueIDs.length} remaining in queue`);
+                    }
                 }
-            } else { //remove from queue
-                const queueID = this
-                    .queueIDs
-                    .findIndex(q => q === userID)
-                const overflowID = this
-                    .overflowIDs
-                    .findIndex(q => q === userID)
-                if (queueID !== -1 || overflowID !== -1) {
-                    if (queueID !== -1) {
-                        this
-                            .queueIDs
-                            .splice(queueID, 1);
-                    }
-                    if (overflowID !== -1) {
-                        this
-                            .overflowIds
-                            .splice(overflowID, 1);
-                    }
-                    message
-                        .channel
-                        .send(`There are ${this.queueIDs.length} remaining in queue`);
-                }
+            } else {
+                message
+                    .channel
+                    .send("Please register before using this command");
             }
-        } else {
-            message
-                .channel
-                .send("Please register before using this command");
+            message.delete();
         }
     }
 }
