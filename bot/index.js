@@ -4,9 +4,13 @@ const fileIO = require("./savedFiles/fileIO");
 //Load in from file
 
 const client = new commando.Client({unknownCommandResponse: false, owner: privateData.ownerID});
-
+const log = console.log;
+console.log = function (body) {
+    log('[ts=' + new Date().toISOString() + '][message=' + body + ']');
+};
 //delete messages if theyre in the right channel and not from the bot
 client.on("message", (message) => {
+    log(message.content);
     if (message.channel.id === "398946565831655424" || message.channel.id === "398934750892392448" || message.channel.id === "398946650514522113" || message.channel.id === "398946603362287643") {
         if (message.author.id !== "398933581314916362") {
             message.delete();
@@ -31,4 +35,4 @@ client
     .registry
     .registerCommandsIn(__dirname + "/commands");
 client.login(privateData.key);
-console.log("Bot is online");
+log("Bot is online");
