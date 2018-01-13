@@ -14,7 +14,9 @@ class QueueCommand extends commando.Command {
     constructor(client) {
         super(client, {
             name: "queue",
-            aliases: ["q","que"],
+            aliases: [
+                "q", "que"
+            ],
             group: "inhouse",
             memberName: "queue",
             description: "!queue will make you **join** OR **leave**, depending on if you are in or not."
@@ -102,7 +104,7 @@ class QueueCommand extends commando.Command {
                                 .push(userID);
                             message
                                 .channel
-                                .send(`Queue currently has ${this.queueIDs.length} players`);
+                                .send(`${user.name} joined the queue, Queue currently has ${this.queueIDs.length} players`);
                             //If there is enough for a game after adding to queue
                             if (this.queueIDs.length === 6) {
                                 message
@@ -166,8 +168,6 @@ class QueueCommand extends commando.Command {
                                 fileIO.writeGames(this.games);
                             }
                         } else {
-                            console.log('Adding user ' + message.user.id + ' to overflow queue while previous match is created. You will be moved to the mai' +
-                                    'n queue shortly.');
                             this
                                 .overflowIds
                                 .push(message.user.id);
@@ -201,7 +201,7 @@ class QueueCommand extends commando.Command {
                         }
                         message
                             .channel
-                            .send(`There are ${this.queueIDs.length} remaining in queue`);
+                            .send(`${user.name} left the queue, Queue currently has ${this.queueIDs.length} players`);
                     }
                 }
             } else {
