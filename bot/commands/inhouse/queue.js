@@ -158,7 +158,7 @@ class QueueCommand extends commando.Command {
                                             value: lobbies.getLobby(uuid)
                                         }, {
                                             "name": "Reporting Instructions",
-                                            value: "Please report results for the winning team using `!report <teamA/teamB>`"
+                                            value: "Please report results for the winning team using `!report win/lose`"
                                         }
                                     ]
                                 }
