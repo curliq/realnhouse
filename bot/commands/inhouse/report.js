@@ -5,6 +5,8 @@ const combinatorics = require("js-combinatorics");
 const fileIO = require("../../savedFiles/fileIO");
 const getClosestMatch = require("../../misc/matchmaking").getClosestMatch;
 const discordFormatting = require("../../misc/discordFormatting");
+const lobbies = require("../../misc/lobbies");
+
 trueskill.TrueSkill();
 
 class ReportCommand extends commando.Command {
@@ -147,6 +149,7 @@ class ReportCommand extends commando.Command {
                             this
                                 .games
                                 .splice(reportedGameIndex, 1);
+                            lobbies.unsetLobby(reportedGame.gameID);
                             fileIO.writeUsers(this.users);
                             fileIO.writeGames(this.games);
                             message
