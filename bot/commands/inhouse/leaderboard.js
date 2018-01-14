@@ -7,7 +7,7 @@ class LeaderboardCommand extends commando.Command {
     constructor(client) {
         super(client, {
             name: "leaderboard",
-            aliases:["l"],
+            aliases: ["l"],
             group: "inhouse",
             memberName: "leaderboard",
             description: "Check the top 15 players"
@@ -19,9 +19,10 @@ class LeaderboardCommand extends commando.Command {
         if (message.channel.id === "398946603362287643") {
             const tmpUsers = [];
             const sortedUsers = sortBy(this.users, (user) => -1 * user.rating.mu);
+            let count = 0;
             sortedUsers.forEach((user, index) => {
                 if ((user.wins + user.losses >= 5)) {
-                    tmpUsers.push(`${index + 1}. ${user.name} ${user.wins} - ${user.losses} - ${Math.floor(100 * user.rating.mu)}`)
+                    tmpUsers.push(`${++ count}. ${user.name} ${user.wins} - ${user.losses} - ${Math.floor(100 * user.rating.mu)}`)
                 }
             });
             message
