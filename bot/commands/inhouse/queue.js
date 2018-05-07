@@ -3,7 +3,6 @@ const uuidv4 = require('uuid-v4');
 const trueskill = require("ts-trueskill");
 const combinatorics = require("js-combinatorics");
 const lobbies = require("../../misc/lobbies");
-const maps = require("../../misc/maps");
 const fileIO = require("../../savedFiles/fileIO");
 const getClosestMatch = require("../../misc/matchmaking").getClosestMatch;
 const userIsRegistered = require("../../misc/matchmaking").userIsRegistered;
@@ -48,10 +47,10 @@ class QueueCommand extends commando.Command {
         return this
             .queueIDs
             .includes(userID) || this
-            .overflowIDs
-            .includes(userID);
+                .overflowIDs
+                .includes(userID);
     }
-    //mmight not work
+
     getQueueDisplayNames() {
         return this
             .queueIDs
@@ -65,17 +64,17 @@ class QueueCommand extends commando.Command {
     }
 
     mergeOverflow() {
-        if (this.queueIDs.length < 6) {
+        if (this.queueIDs.length < 10) {
             if (this.overflowIDs.length > 0) {
                 this.queueIDs = this
                     .queueIDs
-                    .concat(this.overflowIDs.splice(0, 6 - this.queueIDs.length));
+                    .concat(this.overflowIDs.splice(0, 10 - this.queueIDs.length));
             }
         }
     }
 
     formatTeams(teams) {
-        return `**TeamA**\n${teams.teamA[0]}\n${teams.teamA[1]}\n${teams.teamA[2]}\n**TeamB**\n${teams.teamB[0]}\n${teams.teamB[1]}\n${teams.teamB[2]}`;
+        return `**LEADER - ASK FOR PASSWORD**\n ${teams.teamA[0]}\n**PLAYERS**\n${teams.teamB[0]}\n${teams.teamC[0]}\n${teams.teamD[0]}\n${teams.teamE[0]}\n${teams.teamF[0]}\n${teams.teamG[0]}\n${teams.teamH[0]}\n${teams.teamI[0]}\n${teams.teamJ[0]}\n`;
     }
 
     getTagIDs(match) {
@@ -85,7 +84,7 @@ class QueueCommand extends commando.Command {
     }
 
     async run(message, args) {
-        if (message.channel.id === "398934750892392448") {
+        if (message.channel.id === "443050893903003659") {
             if (userIsRegistered(this.users, message.author.id)) {
                 const userID = message.author.id;
                 const user = this
@@ -98,7 +97,7 @@ class QueueCommand extends commando.Command {
                     //User doesnt have a game
                     if (!userActiveGame) {
                         this.mergeOverflow();
-                        if (this.queueIDs.length < 6) {
+                        if (this.queueIDs.length < 10) {
                             this
                                 .queueIDs
                                 .push(userID);
@@ -106,7 +105,7 @@ class QueueCommand extends commando.Command {
                                 .channel
                                 .send(`${user.name} joined the queue, Queue currently has ${this.queueIDs.length} players`);
                             //If there is enough for a game after adding to queue
-                            if (this.queueIDs.length === 6) {
+                            if (this.queueIDs.length === 10) {
                                 message
                                     .channel
                                     .send("Queue is now full, creating a match and clearing the queue");
@@ -117,7 +116,31 @@ class QueueCommand extends commando.Command {
                                         .map(player => player.name),
                                     teamB: closestMatch
                                         .teamB
-                                        .map(player => player.name)
+                                        .map(player => player.name),
+                                    teamC: closestMatch
+                                        .teamC
+                                        .map(player => player.name),
+                                    teamD: closestMatch
+                                        .teamD
+                                        .map(player => player.name),
+                                    teamE: closestMatch
+                                        .teamE
+                                        .map(player => player.name),
+                                    teamF: closestMatch
+                                        .teamF
+                                        .map(player => player.name),
+                                    teamG: closestMatch
+                                        .teamG
+                                        .map(player => player.name),
+                                    teamH: closestMatch
+                                        .teamH
+                                        .map(player => player.name),
+                                    teamI: closestMatch
+                                        .teamI
+                                        .map(player => player.name),
+                                    teamJ: closestMatch
+                                        .teamJ
+                                        .map(player => player.name),
                                 };
                                 //generate a game ID and add them to the game list
                                 const uuid = uuidv4().substring(0, 7);
@@ -128,10 +151,6 @@ class QueueCommand extends commando.Command {
                                         playerIDs: this
                                             .queueIDs
                                             .slice(),
-                                        results: {
-                                            teamA: "nothing",
-                                            teamB: "nothing"
-                                        },
                                         match: closestMatch
                                     });
                                 this.queueIDs = [];
@@ -140,31 +159,27 @@ class QueueCommand extends commando.Command {
                                 const embed = {
                                     "title": "`Match Created`",
                                     "color": 0x50FF38,
-                                    "description": "A 3v3 match has been created",
+                                    "description": "A FFA match has been created",
                                     "author": {
                                         "name": message.guild.name,
-                                        "icon_url": "https://cdn.pixabay.com/photo/2014/04/03/10/11/exclamation-mark-310101_960_720.p" +
-                                                "ng"
+                                        "icon_url": "https://cdn.pixabay.com/photo/2014/04/03/10/11/exclamation-mark-310101_960_720.png"
                                     },
                                     "fields": [
                                         {
                                             "name": "Players",
                                             value: this.formatTeams(teams)
                                         }, {
-                                            "name": "Maps",
-                                            value: maps.getMaps()
-                                        }, {
                                             "name": "Lobby",
                                             value: lobbies.getLobby(uuid)
                                         }, {
                                             "name": "Reporting Instructions",
-                                            value: "Please report results for the winning team using `!report win/lose`"
+                                            value: "Winner should report result using `!report win`"
                                         }
                                     ]
                                 }
                                 message
                                     .channel
-                                    .send(this.getTagIDs(this.games.find(game => game.gameID === uuid).playerIDs), {embed});
+                                    .send(this.getTagIDs(this.games.find(game => game.gameID === uuid).playerIDs), { embed });
                                 fileIO.writeGames(this.games);
                             }
                         } else {
@@ -174,7 +189,7 @@ class QueueCommand extends commando.Command {
                             message
                                 .channel
                                 .send('Added ' + user.name + ' to overflow queue while previous match is created. You will be moved to the mai' +
-                                        'n queue shortly.');
+                                    'n queue shortly.');
                         }
                     } else {
                         message

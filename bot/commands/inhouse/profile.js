@@ -9,7 +9,7 @@ class ProfileCommand extends commando.Command {
             aliases: ["p"],
             group: "inhouse",
             memberName: "profile",
-            description: "Check yours (or others) stats `!profile < /womackx>"
+            description: "Check yours (or others) stats `!profile womackx"
         })
         this.users = fileIO.data.users;
     }
@@ -17,13 +17,12 @@ class ProfileCommand extends commando.Command {
     getOutputFromUser(user) {
         return `\`${user
             .name} ${user
-            .wins} - ${user
-            .losses} - ${Math
-            .floor(user.rating.mu * 100)}\``
+                .wins} - ${user
+                    .losses} \``
     }
 
     async run(message, args) {
-        if (message.channel.id === "398946603362287643") {
+        if (message.channel.id === "443051905216806923") {
             const searchName = args.split(" ")[0];
             if (userIsRegistered(this.users, message.author.id)) {
                 if (searchName) {
@@ -46,7 +45,6 @@ class ProfileCommand extends commando.Command {
                     message
                         .channel
                         .send(this.getOutputFromUser(foundUser))
-
                 }
             } else {
                 message

@@ -16,13 +16,13 @@ class LeaderboardCommand extends commando.Command {
     }
 
     async run(message) {
-        if (message.channel.id === "398946603362287643") {
+        if (message.channel.id === "443051905216806923") {
             const tmpUsers = [];
-            const sortedUsers = sortBy(this.users, (user) => -1 * user.rating.mu);
+            const sortedUsers = sortBy(this.users, (user) => -1 * user.wins);
             let count = 0;
             sortedUsers.forEach((user, index) => {
                 if ((user.wins + user.losses >= 5)) {
-                    tmpUsers.push(`${++ count}. ${user.name} ${user.wins} - ${user.losses} - ${Math.floor(100 * user.rating.mu)}`)
+                    tmpUsers.push(`${++count}. ${user.name} ${user.wins} - ${user.losses}`)
                 }
             });
             message

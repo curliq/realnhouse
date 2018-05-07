@@ -13,11 +13,11 @@ class RegisterCommand extends commando.Command {
             args: [
                 {
                     key: "sn",
-                    prompt: "Please type your battlerite username",
+                    prompt: "Please type your darwin username",
                     type: "string"
                 }, {
                     key: "region",
-                    prompt: "Please type your battlerite region",
+                    prompt: "Please type your darwin region",
                     type: "string"
                 }
             ]
@@ -26,7 +26,7 @@ class RegisterCommand extends commando.Command {
     }
 
     async run(message, args) {
-        if (message.channel.id == '398946565831655424') {
+        if (message.channel.id == '443051842553905162') {
             if (args.region.toUpperCase() !== "NA" && args.region.toUpperCase() !== "EU") {
                 message
                     .channel

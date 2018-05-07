@@ -56,10 +56,6 @@ exports.writeGames = () => {
     games.forEach(game => {
         const tmpGame = {
             gameID: game.gameID,
-            results: {
-                teamA: "nothing",
-                teamB: "nothing"
-            }
         }
         if (game.playerIDs) {
             tmpGame.playerIDs = game.playerIDs;
@@ -81,7 +77,7 @@ exports.readGames = () => {
         const players = game
             .playerIDs
             .map(playerID => users.find(user => user.discordID === playerID));
-        if (game.playerIDs.length === 6) {
+        if (game.playerIDs.length === 10) {
             game.match = getClosestMatch(players);
         }
         games.push(game);

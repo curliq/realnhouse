@@ -30,9 +30,9 @@ class ReportCommand extends commando.Command {
     }
 
     async run(message, args) {
-        if (message.channel.id === "398946650514522113") {
+        if (message.channel.id === "443051872610156549") {
             const userID = message.author.id;
-            if (args.result) { //only require teamA/B
+            if (args.result) {
                 const winOrLose = args
                     .result
                     .toLowerCase();
@@ -46,115 +46,54 @@ class ReportCommand extends commando.Command {
                 if (reportedGame) {
                     if (reportedGame.playerIDs.find(id => id === userID)) {
                         const matchID = reportedGame.gameID;
-                        let winningTeam = "undecided";
                         let playersTeam = "dunnoyet";
+
                         if (reportedGame.match.teamA.find(player => player.discordID === userID)) {
                             playersTeam = "teamA"
-                        } else {
+                        } else if (reportedGame.match.teamB.find(player => player.discordID === userID)) {
                             playersTeam = "teamB"
                         }
+                        else if (reportedGame.match.teamC.find(player => player.discordID === userID)) {
+                            playersTeam = "teamC"
+                        }
+                        else if (reportedGame.match.teamD.find(player => player.discordID === userID)) {
+                            playersTeam = "teamD"
+                        }
+                        else if (reportedGame.match.teamE.find(player => player.discordID === userID)) {
+                            playersTeam = "teamE"
+                        }
+                        else if (reportedGame.match.teamF.find(player => player.discordID === userID)) {
+                            playersTeam = "teamF"
+                        }
+                        else if (reportedGame.match.teamG.find(player => player.discordID === userID)) {
+                            playersTeam = "teamG"
+                        }
+                        else if (reportedGame.match.teamH.find(player => player.discordID === userID)) {
+                            playersTeam = "teamH"
+                        }
+                        else if (reportedGame.match.teamI.find(player => player.discordID === userID)) {
+                            playersTeam = "teamI"
+                        }
+                        else if (reportedGame.match.teamJ.find(player => player.discordID === userID)) {
+                            playersTeam = "teamJ"
+                        }
+                        const teamNames = ["teamA", "teamB", "teamC", "teamD", "teamE", "teamF", "teamG", "teamH", "teamI", "teamJ",]
                         if (winOrLose === "win" || winOrLose === "won") {
-                            reportedGame.results[playersTeam] = "won";
-                        } else if (winOrLose === "lose" || winOrLose === "lost" || winOrLose === "loss") {
-                            reportedGame.results[playersTeam] = "lost";
-                        }
-                        //Then check if its right, so one team should have one, one lost etc.
-                        if (reportedGame.results.teamA === "lost" & reportedGame.results.teamB === "won") {
-                            winningTeam = "teamb";
-                        } else if (reportedGame.results.teamA === "won" & reportedGame.results.teamB === "lost") {
-                            winningTeam = "teama";
-                        }
-                        //if winning team has been set then it'll go ahead
-                        if (reportedGame.results.teamA !== "nothing" && reportedGame.results.teamB !== "nothing" && winningTeam === "undecided") {
-                            message
-                                .channel
-                                .send(`Current status of game report:\n\`TeamA: ${reportedGame.results.teamA}\nTeamB: ${reportedGame.results.teamB}\``)
-                        }
-                        if (winningTeam.toLowerCase() === "teama") {
-                            reportedGame
-                                .match
-                                .teamA
-                                .forEach(player => player.wins += 1);
-                            reportedGame
-                                .match
-                                .teamB
-                                .forEach(player => player.losses += 1);
-                            var teamARatings = reportedGame
-                                .match
-                                .teamA
-                                .map(player => player.rating);
-                            var teamBRatings = reportedGame
-                                .match
-                                .teamB
-                                .map(player => player.rating);
-                            var [teamARatings,
-                                teamBRatings] = trueskill.rate([teamARatings, teamBRatings]);
-                            reportedGame
-                                .match
-                                .teamA
-                                .forEach((player, i) => player.rating = teamARatings[i]);
-                            reportedGame
-                                .match
-                                .teamB
-                                .forEach((player, i) => player.rating = teamBRatings[i]);
-                            const matchPlayers = reportedGame
-                                .match
-                                .teamA
-                                .concat(reportedGame.match.teamB);
-                            // const sortedMatchPlayers
-                            const output = matchPlayers.map(player => `${player.name}: ${Math.floor(100 * player.rating.mu)}`);
+                            for (let i = 0; i < teamNames.length; i++) {
+                                if (teamNames[i] === playersTeam) {
+                                    reportedGame.match[teamNames[i]][0].wins += 1;
+                                } else {
+                                    reportedGame.match[teamNames[i]][0].losses += 1;
+                                }
+                            }
                             this
                                 .games
                                 .splice(reportedGameIndex, 1);
                             fileIO.writeUsers(this.users);
                             fileIO.writeGames(this.games);
-
                             message
                                 .channel
-                                .send(`Updated results for match ID \` ${matchID} \` with winning Team: TeamA\n Ratings after match are ${discordFormatting.jsonFormat(JSON.stringify(output, null, 4))}`);
-                        } else if (winningTeam.toLowerCase() === "teamb") {
-                            reportedGame
-                                .match
-                                .teamB
-                                .forEach(player => player.wins += 1);
-                            reportedGame
-                                .match
-                                .teamA
-                                .forEach(player => player.losses += 1);
-                            var teamBRatings = reportedGame
-                                .match
-                                .teamB
-                                .map(player => player.rating);
-                            var teamARatings = reportedGame
-                                .match
-                                .teamA
-                                .map(player => player.rating);
-                            var [teamBRatings,
-                                teamARatings] = trueskill.rate([teamBRatings, teamARatings]);
-                            reportedGame
-                                .match
-                                .teamB
-                                .forEach((player, i) => player.rating = teamBRatings[i]);
-                            reportedGame
-                                .match
-                                .teamA
-                                .forEach((player, i) => player.rating = teamARatings[i]);
-
-                            const matchPlayers = reportedGame
-                                .match
-                                .teamB
-                                .concat(reportedGame.match.teamA);
-                            // const sortedMatchPlayers
-                            const output = matchPlayers.map(player => `${player.name}: ${Math.floor(100 * player.rating.mu)}`);
-                            this
-                                .games
-                                .splice(reportedGameIndex, 1);
-                            lobbies.unsetLobby(reportedGame.gameID);
-                            fileIO.writeUsers(this.users);
-                            fileIO.writeGames(this.games);
-                            message
-                                .channel
-                                .send(`Updated results for match ID \` ${matchID} \` with winning Team: TeamB\n Ratings after match are ${discordFormatting.jsonFormat(JSON.stringify(output, null, 4))}`);
+                                .send(`Updated results for match ID \` ${matchID} \` With ${message.author.username} winning\n`);
                         }
                     } else {
                         message

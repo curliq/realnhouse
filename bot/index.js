@@ -3,16 +3,16 @@ const commando = require("discord.js-commando");
 const fileIO = require("./savedFiles/fileIO");
 //Load in from file
 
-const client = new commando.Client({unknownCommandResponse: false, owner: privateData.ownerID});
+const client = new commando.Client({ unknownCommandResponse: false, owner: privateData.ownerID });
 const log = console.log;
-console.log = function (body) {
-    log('[ts=' + new Date().toISOString() + '][message=' + body + ']');
-};
+// console.log = function (body) {
+//     log('[ts=' + new Date().toISOString() + '][message=' + body + ']');
+// };
 //delete messages if theyre in the right channel and not from the bot
 client.on("message", (message) => {
     log(message.content);
-    if (message.channel.id === "398946565831655424" || message.channel.id === "398934750892392448" || message.channel.id === "398946650514522113" || message.channel.id === "398946603362287643") {
-        if (message.author.id !== "398933581314916362") {
+    if (message.channel.id === "443051842553905162" || message.channel.id === "443050893903003659" || message.channel.id === "443051872610156549" || message.channel.id === "443051905216806923") {
+        if (message.author.id !== "443130565194153984") {
             message.delete();
         }
     }
