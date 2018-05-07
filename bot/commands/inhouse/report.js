@@ -41,7 +41,7 @@ class ReportCommand extends commando.Command {
                     .find(game => game.playerIDs.includes(userID))
                 const reportedGameIndex = this
                     .games
-                    .find(game => game.playerIDs.includes(userID))
+                    .findIndex(game => game.playerIDs.includes(userID))
 
                 if (reportedGame) {
                     if (reportedGame.playerIDs.find(id => id === userID)) {

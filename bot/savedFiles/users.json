@@ -1,11 +1,281 @@
 [
   {
     "discordID": "121630407782432769",
-    "name": "womackx",
-    "sigma": 1.598952313175052,
-    "mu": 24.583349769055364,
-    "wins": 6,
+    "name": "womack",
+    "sigma": 1.618,
+    "mu": 25,
+    "wins": 0,
+    "losses": 0,
+    "region": "EU"
+  },
+  {
+    "discordID": "245173261254656001",
+    "name": "Rutha",
+    "sigma": 1.538389593107642,
+    "mu": 24.375392600137022,
+    "wins": 3,
     "losses": 6,
+    "region": "EU"
+  },
+  {
+    "discordID": "131427020369297408",
+    "name": "vAgue",
+    "sigma": 1.5153726627837463,
+    "mu": 25.726457821288832,
+    "wins": 8,
+    "losses": 4,
+    "region": "EU"
+  },
+  {
+    "discordID": "139459892653064193",
+    "name": "bewz",
+    "sigma": 1.554900688271558,
+    "mu": 25.171266464151763,
+    "wins": 4,
+    "losses": 3,
+    "region": "EU"
+  },
+  {
+    "discordID": "150933458414206976",
+    "name": "Joltz",
+    "sigma": 1.5229767210311922,
+    "mu": 24.467862048178638,
+    "wins": 4,
+    "losses": 7,
+    "region": "EU"
+  },
+  {
+    "discordID": "211816250819477504",
+    "name": "Furic",
+    "sigma": 1.5989529439973973,
+    "mu": 24.586546604522386,
+    "wins": 0,
+    "losses": 2,
+    "region": "EU"
+  },
+  {
+    "discordID": "105359026811846656",
+    "name": "randler#7453",
+    "sigma": 1.618,
+    "mu": 25,
+    "wins": 0,
+    "losses": 0,
+    "region": "EU"
+  },
+  {
+    "discordID": "85306030287773696",
+    "name": "Godof",
+    "sigma": 1.5631949514984993,
+    "mu": 25.810462122348113,
+    "wins": 5,
+    "losses": 1,
+    "region": "EU"
+  },
+  {
+    "discordID": "227069702461980674",
+    "name": "Srymea",
+    "sigma": 1.5987625716677731,
+    "mu": 25.419621359420496,
+    "wins": 2,
+    "losses": 0,
+    "region": "EU"
+  },
+  {
+    "discordID": "83555170096517120",
+    "name": "Synoo",
+    "sigma": 1.59888695880156,
+    "mu": 24.99932283037917,
+    "wins": 1,
+    "losses": 1,
+    "region": "EU"
+  },
+  {
+    "discordID": "329143148511232010",
+    "name": "TheMostCommonBoy",
+    "sigma": 1.5388443775375886,
+    "mu": 25.18669919235703,
+    "wins": 5,
+    "losses": 4,
+    "region": "EU"
+  },
+  {
+    "discordID": "141175772588146688",
+    "name": "klerny",
+    "sigma": 1.546818635711732,
+    "mu": 25.405163316583675,
+    "wins": 5,
+    "losses": 3,
+    "region": "EU"
+  },
+  {
+    "discordID": "126816150314156043",
+    "name": "mr2",
+    "sigma": 1.5158237204715044,
+    "mu": 23.475443619703118,
+    "wins": 2,
+    "losses": 10,
+    "region": "EU"
+  },
+  {
+    "discordID": "196737766770343937",
+    "name": "Hotbiscuit",
+    "sigma": 1.5236625118039269,
+    "mu": 24.496997961320258,
+    "wins": 4,
+    "losses": 7,
+    "region": "EU"
+  },
+  {
+    "discordID": "246637371234320386",
+    "name": "MORVWY",
+    "sigma": 1.618,
+    "mu": 25,
+    "wins": 0,
+    "losses": 0,
+    "region": "EU"
+  },
+  {
+    "discordID": "194371096047255552",
+    "name": "Lum1nary",
+    "sigma": 1.6084269585176696,
+    "mu": 24.794840747351113,
+    "wins": 0,
+    "losses": 1,
+    "region": "EU"
+  },
+  {
+    "discordID": "249265019328528397",
+    "name": "idol",
+    "sigma": 1.5552750546620873,
+    "mu": 24.809087652320496,
+    "wins": 3,
+    "losses": 4,
+    "region": "EU"
+  },
+  {
+    "discordID": "209709911460806657",
+    "name": "Xqkfuu",
+    "sigma": 1.618,
+    "mu": 25,
+    "wins": 0,
+    "losses": 0,
+    "region": "EU"
+  },
+  {
+    "discordID": "82968090089885696",
+    "name": "Jeter",
+    "sigma": 1.618,
+    "mu": 25,
+    "wins": 0,
+    "losses": 0,
+    "region": "EU"
+  },
+  {
+    "discordID": "273204979257573376",
+    "name": "Imoshen",
+    "sigma": 1.5636595198150944,
+    "mu": 25.402516776794247,
+    "wins": 4,
+    "losses": 2,
+    "region": "EU"
+  },
+  {
+    "discordID": "119180619954520068",
+    "name": "Dizzl3r",
+    "sigma": 1.6082695450266837,
+    "mu": 24.789313148024174,
+    "wins": 0,
+    "losses": 1,
+    "region": "EU"
+  },
+  {
+    "discordID": "207582905684197377",
+    "name": "Jurgen",
+    "sigma": 1.5992120458978305,
+    "mu": 25.402349582346673,
+    "wins": 2,
+    "losses": 0,
+    "region": "EU"
+  },
+  {
+    "discordID": "170222708347371521",
+    "name": "yy.",
+    "sigma": 1.618,
+    "mu": 25,
+    "wins": 0,
+    "losses": 0,
+    "region": "EU"
+  },
+  {
+    "discordID": "254612619997085697",
+    "name": "gezab",
+    "sigma": 1.618,
+    "mu": 25,
+    "wins": 0,
+    "losses": 0,
+    "region": "EU"
+  },
+  {
+    "discordID": "137189843363954688",
+    "name": "loreo",
+    "sigma": 1.580828132554663,
+    "mu": 25.40488900176646,
+    "wins": 3,
+    "losses": 1,
+    "region": "EU"
+  },
+  {
+    "discordID": "105221541024772096",
+    "name": "Averse",
+    "sigma": 1.6084269585176696,
+    "mu": 25.205159252648887,
+    "wins": 1,
+    "losses": 0,
+    "region": "NA"
+  },
+  {
+    "discordID": "150354957613268992",
+    "name": "slsfknsucks",
+    "sigma": 1.618,
+    "mu": 25,
+    "wins": 0,
+    "losses": 0,
+    "region": "EU"
+  },
+  {
+    "discordID": "278991025278681099",
+    "name": "GeekishNerd",
+    "sigma": 1.618,
+    "mu": 25,
+    "wins": 0,
+    "losses": 0,
+    "region": "EU"
+  },
+  {
+    "discordID": "159379649670021120",
+    "name": "YourN1ghtmare-",
+    "sigma": 1.608304365765544,
+    "mu": 25.210774315537627,
+    "wins": 1,
+    "losses": 0,
+    "region": "EU"
+  },
+  {
+    "discordID": "146751963458043904",
+    "name": "bbiceps-",
+    "sigma": 1.618,
+    "mu": 25,
+    "wins": 0,
+    "losses": 0,
+    "region": "EU"
+  },
+  {
+    "discordID": "286147583959891968",
+    "name": "Nathlan",
+    "sigma": 1.618,
+    "mu": 25,
+    "wins": 0,
+    "losses": 0,
     "region": "EU"
   }
 ]

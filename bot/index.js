@@ -36,3 +36,7 @@ client
     .registerCommandsIn(__dirname + "/commands");
 client.login(privateData.key);
 log("Bot is online");
+
+process.on('unhandledRejection', error => {
+    log(error.message);
+});
