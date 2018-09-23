@@ -12,7 +12,7 @@ console.log = function (body) {
 
 client.on("message", (message) => {
     log(message.content + " - on " + message.channel);
-}
+})
 
 fileIO.readUsers();
 fileIO.readGames();
