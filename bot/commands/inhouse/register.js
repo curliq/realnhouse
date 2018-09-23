@@ -1,4 +1,5 @@
 const commando = require("discord.js-commando");
+const constants = require("../../constants");
 const fileIO = require("../../savedFiles/fileIO");
 const trueskill = require("ts-trueskill");
 trueskill.TrueSkill();
@@ -26,7 +27,7 @@ class RegisterCommand extends commando.Command {
     }
 
     async run(message, args) {
-        if (message.channel.id == '493441366769270794') {
+        if (message.channel.id === constants.CHANNEL_REGISTER) {
             if (args.region.toUpperCase() !== "NA" && args.region.toUpperCase() !== "EU") {
                 message
                     .channel
@@ -40,7 +41,6 @@ class RegisterCommand extends commando.Command {
                 const region = args
                     .region
                     .toUpperCase();
-                console.log("oof")
                 if (!this.users.find(u => u.discordID === discordID) && !this.users.find(u => u.name === name)) {
                     const newUser = {
                         discordID,

@@ -2,6 +2,7 @@ const commando = require("discord.js-commando");
 const uuidv4 = require('uuid-v4');
 const trueskill = require("ts-trueskill");
 const combinatorics = require("js-combinatorics");
+const constants = require("../../constants");
 const fileIO = require("../../savedFiles/fileIO");
 const getClosestMatch = require("../../misc/matchmaking").getClosestMatch;
 const discordFormatting = require("../../misc/discordFormatting");
@@ -30,7 +31,7 @@ class ReportCommand extends commando.Command {
     }
 
     async run(message, args) {
-        if (message.channel.id === "398946650514522113") {
+        if (message.channel.id === constants.CHANNEL_MATCH_RESULTS) {
             const userID = message.author.id;
             if (args.result) { //only require teamA/B
                 const winOrLose = args

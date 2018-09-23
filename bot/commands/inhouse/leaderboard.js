@@ -1,5 +1,6 @@
 const commando = require("discord.js-commando");
 const sortBy = require("lodash").sortBy;
+const constants = require("../../constants");
 const fileIO = require("../../savedFiles/fileIO");
 const discordFormatting = require("../../misc/discordFormatting");
 
@@ -16,7 +17,7 @@ class LeaderboardCommand extends commando.Command {
     }
 
     async run(message) {
-        if (message.channel.id === "398946603362287643") {
+        if (message.channel.id === constants.CHANNEL_LEADERBOARD) {
             const tmpUsers = [];
             const sortedUsers = sortBy(this.users, (user) => -1 * user.rating.mu);
             let count = 0;

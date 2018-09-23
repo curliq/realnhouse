@@ -3,6 +3,7 @@ const uuidv4 = require('uuid-v4');
 const trueskill = require("ts-trueskill");
 const combinatorics = require("js-combinatorics");
 const lobbies = require("../../misc/lobbies");
+const constants = require("../../constants");
 const maps = require("../../misc/maps");
 const fileIO = require("../../savedFiles/fileIO");
 const getClosestMatch = require("../../misc/matchmaking").getClosestMatch;
@@ -87,7 +88,7 @@ class QueueCommand extends commando.Command {
     }
 
     async run(message, args) {
-        if (message.channel.id === "493441366769270794" || message.channel.id === "493425906069798942") {
+        if (message.channel.id === constants.CHANNEL_QUEUE) {
             if (userIsRegistered(this.users, message.author.id)) {
                 const userID = message.author.id;
                 const user = this

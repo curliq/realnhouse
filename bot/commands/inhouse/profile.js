@@ -1,5 +1,6 @@
 const commando = require("discord.js-commando");
 const fileIO = require("../../savedFiles/fileIO");
+const constants = require("../../constants");
 const userIsRegistered = require("../../misc/matchmaking").userIsRegistered;
 
 class ProfileCommand extends commando.Command {
@@ -23,7 +24,7 @@ class ProfileCommand extends commando.Command {
     }
 
     async run(message, args) {
-        if (message.channel.id === "493441366769270794") {
+        if (message.channel.id === constants.CHANNEL_LEADERBOARD) {
             const searchName = args.split(" ")[0];
             if (userIsRegistered(this.users, message.author.id)) {
                 if (searchName) {
