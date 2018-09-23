@@ -51,12 +51,14 @@ class QueueCommand extends commando.Command {
             .overflowIDs
             .includes(userID);
     }
-    //mmight not work
+
+    //might not work
     getQueueDisplayNames() {
         return this
             .queueIDs
             .map(userID => this.users.find(user => user.discordID === userID).name);
     }
+
     //same as above
     getQueueUsers() {
         return this
@@ -85,7 +87,7 @@ class QueueCommand extends commando.Command {
     }
 
     async run(message, args) {
-        if (message.channel.id === "398934750892392448") {
+        if (message.channel.id === "493441366769270794" || message.channel.id === "493425906069798942") {
             if (userIsRegistered(this.users, message.author.id)) {
                 const userID = message.author.id;
                 const user = this
@@ -143,8 +145,8 @@ class QueueCommand extends commando.Command {
                                     "description": "A 3v3 match has been created",
                                     "author": {
                                         "name": message.guild.name,
-                                        "icon_url": "https://cdn.pixabay.com/photo/2014/04/03/10/11/exclamation-mark-310101_960_720.p" +
-                                                "ng"
+                                        "icon_url": "https://cdn.pixabay.com/photo/2014/04/03/10/11/" +
+                                            "exclamation-mark-310101_960_720.png"
                                     },
                                     "fields": [
                                         {
@@ -174,7 +176,7 @@ class QueueCommand extends commando.Command {
                             message
                                 .channel
                                 .send('Added ' + user.name + ' to overflow queue while previous match is created. You will be moved to the mai' +
-                                        'n queue shortly.');
+                                    'n queue shortly.');
                         }
                     } else {
                         message

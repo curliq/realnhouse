@@ -277,5 +277,14 @@
     "wins": 0,
     "losses": 0,
     "region": "EU"
+  },
+  {
+    "discordID": "233347968378339328",
+    "name": "Curlicue",
+    "sigma": 1.618,
+    "mu": 25,
+    "wins": 0,
+    "losses": 0,
+    "region": "EU"
   }
 ]

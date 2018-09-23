@@ -23,7 +23,7 @@ class ProfileCommand extends commando.Command {
     }
 
     async run(message, args) {
-        if (message.channel.id === "398946603362287643") {
+        if (message.channel.id === "493441366769270794") {
             const searchName = args.split(" ")[0];
             if (userIsRegistered(this.users, message.author.id)) {
                 if (searchName) {

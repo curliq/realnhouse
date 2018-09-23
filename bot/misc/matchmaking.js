@@ -1,5 +1,4 @@
 const combinatorics = require("js-combinatorics");
-
 const trueskill = require("ts-trueskill");
 trueskill.TrueSkill();
 exports.userIsRegistered = (userList, discordID) => {
