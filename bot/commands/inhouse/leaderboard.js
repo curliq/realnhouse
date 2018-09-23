@@ -30,7 +30,6 @@ class LeaderboardCommand extends commando.Command {
                 .channel
                 .send(`Top 15 users with 5+ games played are:${discordFormatting.jsonFormat(JSON.stringify(tmpUsers.slice(0, 15), null, 4))}`);
         }
-        message.delete();
     }
 }
 

@@ -63,7 +63,6 @@ class RegisterCommand extends commando.Command {
                         .send(`${discordID} or ${name} is already registered.`);
                 }
             }
-            message.delete();
         }
     }
 }

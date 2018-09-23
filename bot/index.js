@@ -9,19 +9,7 @@ const log = console.log;
 console.log = function (body) {
     log('[ts=' + new Date().toISOString() + '][message=' + body + ']');
 };
-//delete messages if they're in the right channel and not from the bot
-client.on("message", (message) => {
-    log(message.content);
-    if (message.channel.id === constants.CHANNEL_REGISTER ||
-        message.channel.id === constants.CHANNEL_LEADERBOARD ||
-        message.channel.id === constants.CHANNEL_MATCH_RESULTS ||
-        message.channel.id === constants.CHANNEL_QUEUE) {
 
-        if (message.author.id !== constants.BOT_ID) {
-            message.delete();
-        }
-    }
-});
 fileIO.readUsers();
 fileIO.readGames();
 client

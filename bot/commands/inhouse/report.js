@@ -172,7 +172,6 @@ class ReportCommand extends commando.Command {
                     .channel
                     .send("Invalid command");
             }
-            message.delete();
         }
     }
 }

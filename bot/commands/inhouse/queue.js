@@ -107,7 +107,7 @@ class QueueCommand extends commando.Command {
                                 .push(userID);
                             message
                                 .channel
-                                .send(`${user.name} joined the queue, Queue currently has ${this.queueIDs.length} players`);
+                                .send(`**${user.name}** joined the queue, Queue currently has **${this.queueIDs.length}** players`);
                             //If there is enough for a game after adding to queue
                             if (this.queueIDs.length === 6) {
                                 message
@@ -146,8 +146,8 @@ class QueueCommand extends commando.Command {
                                     "description": "A 3v3 match has been created",
                                     "author": {
                                         "name": message.guild.name,
-                                        "icon_url": "https://cdn.pixabay.com/photo/2014/04/03/10/11/" +
-                                            "exclamation-mark-310101_960_720.png"
+                                        "icon_url": "https://cdn.discordapp.com/attachments/420735220593983508/" +
+                                            "493546396935389184/checkbox-marked-circle.png"
                                     },
                                     "fields": [
                                         {
@@ -176,13 +176,13 @@ class QueueCommand extends commando.Command {
                                 .push(message.user.id);
                             message
                                 .channel
-                                .send('Added ' + user.name + ' to overflow queue while previous match is created. You will be moved to the mai' +
-                                    'n queue shortly.');
+                                .send('Added **' + user.name + '** to overflow queue while previous match is created. ' +
+                                    'You will be moved to the main queue shortly.');
                         }
                     } else {
                         message
                             .channel
-                            .send(user.name + ' is already in a match with ID `' + userActiveGame + '`');
+                            .send('**' + user.name + '** is already in a match with ID `' + userActiveGame + '`');
                     }
                 } else { //remove from queue
                     const queueID = this
@@ -204,7 +204,8 @@ class QueueCommand extends commando.Command {
                         }
                         message
                             .channel
-                            .send(`${user.name} left the queue, Queue currently has ${this.queueIDs.length} players`);
+                            .send(`**${user.name}** left the queue, ` +
+                                `Queue currently has **${this.queueIDs.length}** players`);
                     }
                 }
             } else {
@@ -212,7 +213,6 @@ class QueueCommand extends commando.Command {
                     .channel
                     .send("Please register before using this command");
             }
-            message.delete();
         }
     }
 }

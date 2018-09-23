@@ -54,7 +54,6 @@ class ProfileCommand extends commando.Command {
                     .channel
                     .send("Please register before using this command");
             }
-            message.delete();
         }
     }
 }
