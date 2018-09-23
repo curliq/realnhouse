@@ -45,6 +45,7 @@ class ReportCommand extends commando.Command {
                     .findIndex(game => game.playerIDs.includes(userID))
 
                 if (reportedGame) {
+                    console.log("reported game: " + reportedGame)
                     if (reportedGame.playerIDs.find(id => id === userID)) {
                         const matchID = reportedGame.gameID;
                         let winningTeam = "undecided";
@@ -66,7 +67,9 @@ class ReportCommand extends commando.Command {
                             winningTeam = "teama";
                         }
                         //if winning team has been set then it'll go ahead
-                        if (reportedGame.results.teamA !== "nothing" && reportedGame.results.teamB !== "nothing" && winningTeam === "undecided") {
+                        if (reportedGame.results.teamA !== "nothing" &&
+                            reportedGame.results.teamB !== "nothing" &&
+                            winningTeam === "undecided") {
                             message
                                 .channel
                                 .send(`Current status of game report:\n\`TeamA: ${reportedGame.results.teamA}\nTeamB: ${reportedGame.results.teamB}\``)

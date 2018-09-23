@@ -10,6 +10,10 @@ console.log = function (body) {
     log('[ts=' + new Date().toISOString() + '][message=' + body + ']');
 };
 
+client.on("message", (message) => {
+    log(message.content + " - on " + message.channel);
+}
+
 fileIO.readUsers();
 fileIO.readGames();
 client

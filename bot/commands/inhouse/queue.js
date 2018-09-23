@@ -109,6 +109,7 @@ class QueueCommand extends commando.Command {
                                 .channel
                                 .send(`**${user.name}** joined the queue, Queue currently has **${this.queueIDs.length}** players`);
                             //If there is enough for a game after adding to queue
+                            console.log("length is " + this.queueIDs.length)
                             if (this.queueIDs.length === 6) {
                                 message
                                     .channel
@@ -167,7 +168,8 @@ class QueueCommand extends commando.Command {
                                 }
                                 message
                                     .channel
-                                    .send(this.getTagIDs(this.games.find(game => game.gameID === uuid).playerIDs), {embed});
+                                    .send(this.getTagIDs(this.games.find(game => game.gameID === uuid).playerIDs),
+                                        {embed});
                                 fileIO.writeGames(this.games);
                             }
                         } else {
