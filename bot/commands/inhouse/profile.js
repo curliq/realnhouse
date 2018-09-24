@@ -1,8 +1,8 @@
 const commando = require("discord.js-commando");
+const { RichEmbed } = require('discord.js');
 const fileIO = require("../../savedFiles/fileIO");
 const constants = require("../../constants");
 const userIsRegistered = require("../../misc/matchmaking").userIsRegistered;
-
 class ProfileCommand extends commando.Command {
     constructor(client) {
         super(client, {
@@ -15,12 +15,15 @@ class ProfileCommand extends commando.Command {
         this.users = fileIO.data.users;
     }
 
-    getOutputFromUser(user) {
-        return `\`${user
-            .name} ${user
-            .wins} - ${user
-            .losses} - ${Math
-            .floor(user.rating.mu * 100)}\``
+    getOutputFromUser(user, author) {
+        return new RichEmbed()
+            .setURL(constants.EMBED_LINK)
+            .setTitle(user.name)
+            .setColor(constants.EMBED_COLOR)
+            .setFooter(`Requested by ${author.username}`, author.avatarURL)
+            .addField("**Wins**", user.wins, true)
+            .addField("**Losses**", user.losses, true)
+            .addField("**MMR**", Math.floor(user.rating.mu *100), true);
     }
 
     async run(message, args) {
@@ -34,7 +37,7 @@ class ProfileCommand extends commando.Command {
                     if (foundUser) {
                         message
                             .channel
-                            .send(this.getOutputFromUser(foundUser))
+                            .send(this.getOutputFromUser(foundUser, message.author))
                     } else {
                         message
                             .channel
@@ -46,7 +49,7 @@ class ProfileCommand extends commando.Command {
                         .find(user => user.discordID === message.author.id);
                     message
                         .channel
-                        .send(this.getOutputFromUser(foundUser))
+                        .send(this.getOutputFromUser(foundUser, message.author))
 
                 }
             } else {

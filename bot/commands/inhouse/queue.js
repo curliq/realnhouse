@@ -142,11 +142,9 @@ class QueueCommand extends commando.Command {
                                 this.mergeOverflow();
 
                                 const embed = {
-                                    "title": "`Match Created`",
-                                    "color": 0x50FF38,
-                                    "description": "A 3v3 match has been created",
+                                    "color": constants.EMBED_COLOR,
                                     "author": {
-                                        "name": message.guild.name,
+                                        "name": "Match created!",
                                         "icon_url": "https://cdn.discordapp.com/attachments/420735220593983508/" +
                                             "493546396935389184/checkbox-marked-circle.png"
                                     },
