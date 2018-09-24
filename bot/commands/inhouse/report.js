@@ -69,7 +69,7 @@ class ReportCommand extends commando.Command {
                         if (winningTeam === "undecided") {
                             message
                                 .channel
-                                .send(`Current status of game report:\n\`TeamA: ${reportedGame.results.teamA}\nTeamB: ${reportedGame.results.teamB}\``)
+                                .send(`Current status of game report:\n\n\**TeamA:** \`${reportedGame.results.teamA}\`\n**TeamB:** \`${reportedGame.results.teamB}\``)
                         }
                         if (winningTeam.toLowerCase() === "teama") {
                             reportedGame
