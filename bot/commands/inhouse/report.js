@@ -48,6 +48,7 @@ class ReportCommand extends commando.Command {
                     console.log("reported game: " + reportedGame)
                     if (reportedGame.playerIDs.find(id => id === userID)) {
                         const matchID = reportedGame.gameID;
+                        console.log("match id " + matchID)
                         let winningTeam = "undecided";
                         let playersTeam = "dunnoyet";
                         if (reportedGame.match.teamA.find(player => player.discordID === userID)) {
