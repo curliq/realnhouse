@@ -49,6 +49,7 @@ class ReportCommand extends commando.Command {
                     if (reportedGame.playerIDs.find(id => id === userID)) {
                         const matchID = reportedGame.gameID;
                         console.log("match id " + matchID)
+                        console.log("match " + winOrLose)
                         let winningTeam = "undecided";
                         let playersTeam = "dunnoyet";
                         if (reportedGame.match.teamA.find(player => player.discordID === userID)) {
@@ -56,17 +57,20 @@ class ReportCommand extends commando.Command {
                         } else {
                             playersTeam = "teamB"
                         }
+                        console.log("player is in team " + playersTeam)
                         if (winOrLose === "win" || winOrLose === "won") {
                             reportedGame.results[playersTeam] = "won";
                         } else if (winOrLose === "lose" || winOrLose === "lost" || winOrLose === "loss") {
                             reportedGame.results[playersTeam] = "lost";
                         }
-                        //Then check if its right, so one team should have one, one lost etc.
-                        if (reportedGame.results.teamA === "lost" & reportedGame.results.teamB === "won") {
+                        console.log("results " + reportedGame.results)
+                        //Then check if its right, so one team should have won, one lost etc.
+                        if (reportedGame.results.teamA === "lost" && reportedGame.results.teamB === "won") {
                             winningTeam = "teamb";
-                        } else if (reportedGame.results.teamA === "won" & reportedGame.results.teamB === "lost") {
+                        } else if (reportedGame.results.teamA === "won" && reportedGame.results.teamB === "lost") {
                             winningTeam = "teama";
                         }
+                        console.log("winning team " + winningTeam)
                         //if winning team has been set then it'll go ahead
                         if (reportedGame.results.teamA !== "nothing" &&
                             reportedGame.results.teamB !== "nothing" &&
