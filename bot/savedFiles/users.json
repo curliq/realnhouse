@@ -272,6 +272,15 @@
   {
     "discordID": "286147583959891968",
     "name": "Nathlan",
+    "sigma": 1.6083745599743098,
+    "mu": 25.209476646545752,
+    "wins": 1,
+    "losses": 0,
+    "region": "EU"
+  },
+  {
+    "discordID": "233347968378339328",
+    "name": "Curlicue",
     "sigma": 1.618,
     "mu": 25,
     "wins": 0,
@@ -279,8 +288,107 @@
     "region": "EU"
   },
   {
-    "discordID": "233347968378339328",
-    "name": "Curlicue",
+    "discordID": "222776093793320961",
+    "name": "Larss",
+    "sigma": 1.618,
+    "mu": 25,
+    "wins": 0,
+    "losses": 0,
+    "region": "EU"
+  },
+  {
+    "discordID": "289816984718409728",
+    "name": "fred",
+    "sigma": 1.5897407944297492,
+    "mu": 25.207168611963933,
+    "wins": 2,
+    "losses": 1,
+    "region": "EU"
+  },
+  {
+    "discordID": "314521107270991873",
+    "name": "VASIAGARAJ",
+    "sigma": 1.5897407944297492,
+    "mu": 25.621398823206793,
+    "wins": 3,
+    "losses": 0,
+    "region": "EU"
+  },
+  {
+    "discordID": "272420080179216385",
+    "name": "Nosomi",
+    "sigma": 1.618,
+    "mu": 25,
+    "wins": 0,
+    "losses": 0,
+    "region": "EU"
+  },
+  {
+    "discordID": "111554089896194048",
+    "name": "tomiy",
+    "sigma": 1.5989297230473902,
+    "mu": 24.58318854802873,
+    "wins": 0,
+    "losses": 2,
+    "region": "EU"
+  },
+  {
+    "discordID": "221024427456856064",
+    "name": "eygrr",
+    "sigma": 1.5897407944297492,
+    "mu": 24.792831388036078,
+    "wins": 1,
+    "losses": 2,
+    "region": "EU"
+  },
+  {
+    "discordID": "108605402383388672",
+    "name": "mulkmulkmulk",
+    "sigma": 1.5897407944297492,
+    "mu": 24.78821531887242,
+    "wins": 1,
+    "losses": 2,
+    "region": "EU"
+  },
+  {
+    "discordID": "295547494128156672",
+    "name": "cha1x",
+    "sigma": 1.618,
+    "mu": 25,
+    "wins": 0,
+    "losses": 0,
+    "region": "EU"
+  },
+  {
+    "discordID": "175675112123662337",
+    "name": "Antaresiq",
+    "sigma": 1.618,
+    "mu": 25,
+    "wins": 0,
+    "losses": 0,
+    "region": "EU"
+  },
+  {
+    "discordID": "82164084409114624",
+    "name": "lokkut",
+    "sigma": 1.5989297230473902,
+    "mu": 25.002378265685802,
+    "wins": 1,
+    "losses": 1,
+    "region": "EU"
+  },
+  {
+    "discordID": "230436820876263424",
+    "name": "FarsanTS",
+    "sigma": 1.6083745599743098,
+    "mu": 24.790523353454248,
+    "wins": 0,
+    "losses": 1,
+    "region": "EU"
+  },
+  {
+    "discordID": "154621742776582144",
+    "name": "pimmo",
     "sigma": 1.618,
     "mu": 25,
     "wins": 0,
