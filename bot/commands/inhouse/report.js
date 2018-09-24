@@ -45,11 +45,8 @@ class ReportCommand extends commando.Command {
                     .findIndex(game => game.playerIDs.includes(userID))
 
                 if (reportedGame) {
-                    console.log("reported game: " + reportedGame)
                     if (reportedGame.playerIDs.find(id => id === userID)) {
                         const matchID = reportedGame.gameID;
-                        console.log("match id " + matchID)
-                        console.log("match " + winOrLose)
                         let winningTeam = "undecided";
                         let playersTeam = "dunnoyet";
                         if (reportedGame.match.teamA.find(player => player.discordID === userID)) {
@@ -57,24 +54,19 @@ class ReportCommand extends commando.Command {
                         } else {
                             playersTeam = "teamB"
                         }
-                        console.log("player is in team " + playersTeam)
                         if (winOrLose === "win" || winOrLose === "won") {
                             reportedGame.results[playersTeam] = "won";
                         } else if (winOrLose === "lose" || winOrLose === "lost" || winOrLose === "loss") {
                             reportedGame.results[playersTeam] = "lost";
                         }
-                        console.log("results " + reportedGame.results)
                         //Then check if its right, so one team should have won, one lost etc.
                         if (reportedGame.results.teamA === "lost" && reportedGame.results.teamB === "won") {
                             winningTeam = "teamb";
                         } else if (reportedGame.results.teamA === "won" && reportedGame.results.teamB === "lost") {
                             winningTeam = "teama";
                         }
-                        console.log("winning team " + winningTeam)
                         //if winning team has been set then it'll go ahead
-                        if (reportedGame.results.teamA !== "nothing" &&
-                            reportedGame.results.teamB !== "nothing" &&
-                            winningTeam === "undecided") {
+                        if (winningTeam === "undecided") {
                             message
                                 .channel
                                 .send(`Current status of game report:\n\`TeamA: ${reportedGame.results.teamA}\nTeamB: ${reportedGame.results.teamB}\``)
