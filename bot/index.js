@@ -12,6 +12,12 @@ console.log = function (body) {
 
 client.on("message", (message) => {
     log(message.content + " - on " + message.channel);
+    if (message.channel.id === constants.CHANNEL_QUEUE ||
+        message.channel.id === constants.CHANNEL_LEADERBOARD ||
+        message.channel.id === constants.CHANNEL_REGISTER) {
+        
+        message.delete()
+    }
 })
 
 fileIO.readUsers();

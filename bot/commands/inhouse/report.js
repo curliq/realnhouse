@@ -112,7 +112,7 @@ class ReportCommand extends commando.Command {
 
                             message
                                 .channel
-                                .send(`Updated results for match ID \` ${matchID} \` with winning Team: TeamA\n Ratings after match are ${discordFormatting.jsonFormat(JSON.stringify(output, null, 4))}`);
+                                .send(`Updated results for match ID \` ${matchID} \` with winning team: **TeamA**\n Ratings after match are ${discordFormatting.jsonFormat(JSON.stringify(output, null, 4))}`);
                         } else if (winningTeam.toLowerCase() === "teamb") {
                             reportedGame
                                 .match
@@ -155,7 +155,7 @@ class ReportCommand extends commando.Command {
                             fileIO.writeGames(this.games);
                             message
                                 .channel
-                                .send(`Updated results for match ID \` ${matchID} \` with winning Team: TeamB\n Ratings after match are ${discordFormatting.jsonFormat(JSON.stringify(output, null, 4))}`);
+                                .send(`Updated results for match ID \` ${matchID} \` with winning team: **TeamB**\n Ratings after match are ${discordFormatting.jsonFormat(JSON.stringify(output, null, 4))}`);
                         }
                     } else {
                         message
