@@ -21,6 +21,10 @@ client.on("message", (message) => {
 
 })
 
+client.on("error", (error) => {
+    log(error)
+}
+
 fileIO.readUsers();
 fileIO.readGames();
 client
