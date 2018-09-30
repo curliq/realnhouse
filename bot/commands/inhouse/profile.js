@@ -1,8 +1,9 @@
 const commando = require("discord.js-commando");
-const { RichEmbed } = require('discord.js');
+const {RichEmbed} = require('discord.js');
 const fileIO = require("../../savedFiles/fileIO");
 const constants = require("../../constants");
 const userIsRegistered = require("../../misc/matchmaking").userIsRegistered;
+
 class ProfileCommand extends commando.Command {
     constructor(client) {
         super(client, {
@@ -23,7 +24,7 @@ class ProfileCommand extends commando.Command {
             .setFooter(`Requested by ${author.username}`, author.avatarURL)
             .addField("**Wins**", user.wins, true)
             .addField("**Losses**", user.losses, true)
-            .addField("**MMR**", Math.floor(user.rating.mu *100), true);
+            .addField("**MMR**", Math.floor(user.rating.mu * 100), true);
     }
 
     async run(message, args) {
