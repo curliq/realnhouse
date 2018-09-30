@@ -21,7 +21,7 @@ class InvitedByCommand extends commando.Command {
     }
 
     async run(message, args) {
-        if (message.channel.id === constants.CHANNEL_LEADERBOARD) {
+        if (message.channel.id === constants.CHANNEL_INVITES) {
 
             const baseRole = message.guild.roles.get(constants.BASE_ROLE_ID);
 
