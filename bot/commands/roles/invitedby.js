@@ -11,7 +11,7 @@ class InvitedByCommand extends commando.Command {
             description: "Specifies who invited you to the server and gives you base role",
             args: [
                 {
-                    key: "invitedby",
+                    key: "invitedbyuser",
                     prompt: "Please specify the username of who invited you to this server, example: `!invitedby Curlicue`",
                     type: "string"
                 }
@@ -21,11 +21,14 @@ class InvitedByCommand extends commando.Command {
     }
 
     async run(message, args) {
-        const inviterName = args.split(" ")[0];
-        const role = message.guild.roles.get(constants.BASE_ROLE_ID);
-        if (role !== null) {
-            message.member
-                .addRole(role);
+        if (message.channel.id === constants.CHANNEL_LEADERBOARD) {
+
+            const baseRole = message.guild.roles.get(constants.BASE_ROLE_ID);
+
+            if (baseRole !== null) {
+                message.member.addRole(baseRole);
+                message.reply(`Welcome to the IHL server, invited by: **${args.invitedbyuser}**`)
+            }
         }
     }
 
